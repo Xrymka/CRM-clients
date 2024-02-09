@@ -2,6 +2,7 @@
   --red: #F06A4D;
   --purple: #9873FF;
   --light-grey: #C8C5D1;
+  --light-grey-opacity: rgba(200, 197, 209, 0.5);
   --dark-grey: #B0B0B0;
   --black: #333;
   --white: #fff;
@@ -75,7 +76,7 @@ body {
   font-family: 'OpenSans', sans-serif;
   font-weight: 400;
   font-size: 14px;
-  line-height: 1;
+  line-height: 1.4;
   color: var(--black);
   background-color: var(--white-smoke);
 }
@@ -97,16 +98,12 @@ body {
   margin: 0 auto;
   padding: 0 20px;
   width: 100%;
-  max-width: 1366px;
+  max-width: 1024px;
 }
 
 .container--header {
   display: flex;
   align-items: center;
-}
-
-.container--main {
-  padding: 0 90px;
 }
 
 .header {
@@ -137,6 +134,7 @@ body {
   font-size: 24px;
 }
 
+/* таблица */
 .table {
   width: 100%;
 }
@@ -163,15 +161,37 @@ body {
   background-color: var(--white);
 }
 
+.table__body tr {
+  border-bottom: 1px solid var(--light-grey-opacity);
+}
+
+.table__body td {
+  padding: 10px;
+  min-height: 60px;
+}
+
+.table__body td:first-child {
+  padding-left: 20px;
+}
+
+.table__body td:last-child {
+  display: flex;
+  gap: 30px;
+  padding-right: 20px;
+}
+
 .table__body-column--id {
   font-size: 12px;
   line-height: 16px;
   color: var(--dark-grey);
 }
 
-.contacts-list {
+.contacts__list {
   display: flex;
   gap: 7px;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
 }
 
 .table__body-time {
@@ -184,7 +204,13 @@ body {
 
 }
 
-/* модальные окна*/
+.table__body-button {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+/* модальные окна */
 .modal {
   display: none;
   position: fixed;

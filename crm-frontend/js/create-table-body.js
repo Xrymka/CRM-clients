@@ -1,6 +1,6 @@
 import { createIcons } from './create-icons.js';
 import { editClientHandler, showFullContactsList } from './client-handlers.js';
-import { createDeleteConfirmationModal } from './create-modal.js'
+import { modalModes, openModal } from './modals/create-modal.js'
 
 const SHOWN_CONTACTS_ICONS = 4;
 const MAX_CONTACTS_ICON_IN_THE_ROW = 5;
@@ -46,13 +46,16 @@ function createClientItem(clientObj) {
   clientCreationTime.classList.add('table__body-time');
   clientLastChangingTime.classList.add('table__body-time');
   clientID.classList.add('table__body-column', 'table__body-column--id');
+  editButton.classList.add('table__body-button', 'table__body-button--edit');
+  deleteButton.classList.add('table__body-button', 'table__body-button--delete');
 
   clientActions.append(editButton, deleteButton);
   clientData.append(clientID, clientName, clientCreationDate, clientLastChanging, clientContacts, clientActions);
   tableBody.appendChild(clientData);
 
   deleteButton.addEventListener('click', () => {
-    createDeleteConfirmationModal(clientObj.id);
+    openModal(modalModes.delete, clientObj.id);
+    //createDeleteConfirmationModal(clientObj.id);
   });
 
   editButton.addEventListener('click', () => {
