@@ -308,3 +308,22 @@ body {
 .contacts__item--hidden {
   display: none;
 }
+
+
+
+.required-input {
+  position: relative;
+}
+
+.required-input input::placeholder {
+  color: red; /* Цвет звездочки */
+}
+
+.required-input::before {
+  content: '*';
+  color: red; /* Цвет звездочки */
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  transform: translateY(-50%);
+}

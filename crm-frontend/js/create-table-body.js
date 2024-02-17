@@ -1,5 +1,5 @@
 import { createIcons } from './create-icons.js';
-import { editClientHandler, showFullContactsList } from './client-handlers.js';
+import { showFullContactsList } from './client-handlers.js';
 import { modalModes, openModal } from './modals/create-modal.js'
 
 const SHOWN_CONTACTS_ICONS = 4;
@@ -59,7 +59,8 @@ function createClientItem(clientObj) {
   });
 
   editButton.addEventListener('click', () => {
-    editClientHandler(clientObj);
+    openModal(modalModes.edit, clientObj.id);
+    //editClientHandler(clientObj);
   });
 
   // showMoreButton.addEventListener('click', () => {

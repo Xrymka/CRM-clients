@@ -1,9 +1,10 @@
-import { createIcons } from '../create-icons.js';
 import { createDeleteConfirmationModal } from './delete-modal.js';
+import { createNewClientModal } from './new-modal.js';
+import { createEditClientModal } from './edit-modal.js';
 
 const modalModes = {
   create: 'create',
-  change: 'change',
+  edit: 'edit',
   delete: 'delete'
 }
 
@@ -13,21 +14,16 @@ function createModalBase() {
   let modalOverlay = document.createElement('div');
   let modalWrapper = document.createElement('div');
   let modalContent = document.createElement('div');
-  let closeButton = document.createElement('button');
-  let closeIcon = createIcons.createCrossIcon();
 
   modal.classList.add('modal');
   modalWrapper.classList.add('modal__wrapper');
   modalOverlay.classList.add('modal__overlay');
   modalContent.classList.add('modal__content');
-  closeButton.classList.add('modal__close-btn', 'btn');
 
   modal.appendChild(modalOverlay);
   modal.appendChild(modalWrapper);
   modalWrapper.appendChild(modalContent);
 
-  closeButton.append(closeIcon);
-  modalContent.appendChild(closeButton);
   modalWrapper.append(modalOverlay, modalContent);
   modal.append(modalWrapper);
   document.body.append(modal);
@@ -38,17 +34,21 @@ const modalContent = document.querySelector('.modal__content');
 
 // функция отображения модального окна
 function openModal(modalMode, id) {
+  if (modalContent.children) [...modalContent.children].forEach(el => el.remove());
+
   switch(modalMode) {
     case modalModes.create:
-      //
+      createNewClientModal(id, modalContent);
       break;
-    case modalModes.change:
-      //
+    case modalModes.edit:
+      createEditClientModal(id, modalContent);
       break;
     case modalModes.delete:
       createDeleteConfirmationModal(id, modalContent);
       break;
   }
+
+  document.querySelector('.modal').classList.add('is-active');
 }
 
 export { modalModes, openModal }
