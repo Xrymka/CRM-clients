@@ -36,10 +36,10 @@ function createClientItem(clientObj) {
   let deleteButton = createButton(createIcons.createDeleteIcon(), 'Удалить');
 
   clientID.innerHTML = clientObj.id;
-  clientName.innerHTML = `${clientObj.surname} ${clientObj.name} ${clientObj.lastname}`;
-  clientCreationTime.innerHTML = `${clientObj.createdAt.getHours()}:${clientObj.createdAt.getMinutes()}`;
+  clientName.innerHTML = `${clientObj.surname} ${clientObj.name} ${clientObj.lastName}`;
+  clientCreationTime.innerHTML = `${clientObj.createdAt.getHours()}:${(clientObj.createdAt.getMinutes() < 10)? '0' + clientObj.createdAt.getMinutes() : clientObj.createdAt.getMinutes()}`;
   clientCreationDate.append(clientObj.createdAt.toLocaleDateString(), clientCreationTime);
-  clientLastChangingTime.innerHTML = `${clientObj.updatedAt.getHours()}:${clientObj.updatedAt.getMinutes()}`;
+  clientLastChangingTime.innerHTML = `${clientObj.updatedAt.getHours()}:${(clientObj.updatedAt.getMinutes() < 10)? '0' + clientObj.updatedAt.getMinutes() : clientObj.updatedAt.getMinutes()}`;
   clientLastChanging.append(clientObj.updatedAt.toLocaleDateString(), clientLastChangingTime);
   clientContacts.append(createContactsList(clientObj));
 

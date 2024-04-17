@@ -1,5 +1,12 @@
 import { createClientOnServer, deleteClientOnServer, getData } from './api.js';
 import { createTableBody } from './create-table-body.js';
+import { modalModes, openModal } from './modals/create-modal.js';
+
+const createClientButton = document.querySelector('.main__btn');
+
+createClientButton.addEventListener('click', () => {
+  openModal(modalModes.create, null);
+});
 
 let clientsList = [];
 
@@ -22,6 +29,5 @@ function updateSourceData(objects) {
     clientsList[i].updatedAt = new Date(objects[i].updatedAt);
   }
 }
-
 
 export { clientsList };

@@ -1,4 +1,4 @@
-// функция создания моодального окна (удаление клиента)
+// функция создания модального окна (редактирование клиента)
 export function createEditClientModal(id, modalContent) {
   let title = document.createElement('h2');
   let message = document.createElement('p');

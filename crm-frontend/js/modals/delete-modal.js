@@ -1,6 +1,6 @@
 import { createIcons } from '../create-icons.js';
 
-// функция создания контента моодального окна (удаление клиента)
+// функция создания контента модального окна (удаление клиента)
 export function createDeleteConfirmationModal(id, modalContent) {
   let title = document.createElement('h2');
   let message = document.createElement('p');

@@ -1,4 +1,6 @@
-// функция создания моодального окна (удаление клиента)
+import { createIcons } from '../create-icons.js';
+
+// функция создания модального окна (добавление клиента)
 export function createNewClientModal(id, modalContent) {
   let title = document.createElement('h2');
   let form = document.createElement('form');
@@ -10,42 +12,44 @@ export function createNewClientModal(id, modalContent) {
   let labelPatronymic = document.createElement('label');
   let inputPatronymic = document.createElement('input');
   let fieldsetContacts = document.createElement('fieldset');
-  let addButton = document.createElement('button');
-  let deleteButton = document.createElement('button');
+  let addContactButton = document.createElement('button');
+  let createButton = document.createElement('button');
   let cancelButton = document.createElement('button');
   let closeButton = document.createElement('button');
   let closeIcon = createIcons.createCrossIcon();
 
   //#region 123
-  inputLastName.setAttribute("type", "text");
-  inputLastName.setAttribute("placeholder", "Фамилия");
-  inputLastName.setAttribute("required", "true");
+  inputLastName.setAttribute('type', 'text');
+  inputLastName.setAttribute('placeholder', 'Фамилия');
+  inputLastName.setAttribute('required', 'true');
   //#endregion
 
-  inputName.setAttribute("type", "text");
-  inputName.setAttribute("placeholder", "Имя");
-  inputName.setAttribute("required", "true");
+  inputName.setAttribute('type', 'text');
+  inputName.setAttribute('placeholder', 'Имя');
+  inputName.setAttribute('required', 'true');
 
-  inputPatronymic.setAttribute("type", "text");
-  inputPatronymic.setAttribute("placeholder", "Отчество");
+  inputPatronymic.setAttribute('type', 'text');
+  inputPatronymic.setAttribute('placeholder', 'Отчество');
+
+  createButton.setAttribute('type', 'submit');
+  cancelButton.setAttribute('type', 'reset');
+  closeButton.setAttribute('type', 'reset');
 
   title.classList.add('modal__title');
-  labelLastName.classList.add("required-input");
-  inputName.classList.add("required-input");
-  deleteButton.classList.add('modal__btn', 'btn');
+  labelLastName.classList.add('required-input');
+  labelName.classList.add('required-input');
+  createButton.classList.add('modal__btn', 'btn');
   cancelButton.classList.add('modal__cancel-btn', 'btn');
   closeButton.classList.add('modal__close-btn', 'btn');
 
+  labelLastName.append(inputLastName);
+  labelName.append(inputName);
+  labelPatronymic.append(inputPatronymic);
   closeButton.append(closeIcon);
   title.innerHTML = 'Новый клиент';
-  addButton.innerHTML = 'Добавить контакт';
-  deleteButton.innerHTML = 'Сохранить';
+  addContactButton.innerHTML = 'Добавить контакт';
+  createButton.innerHTML = 'Сохранить';
   cancelButton.innerHTML = 'Отмена';
-
-  deleteButton.addEventListener('click', () => {
-    //addClient(id); ЗДЕСЬ НУЖНО добавить клиента в базу и таблицу
-    document.querySelector('.modal').classList.remove('is-active');
-  });
 
   cancelButton.addEventListener('click', () => {
     document.querySelector('.modal').classList.remove('is-active');
@@ -55,5 +59,9 @@ export function createNewClientModal(id, modalContent) {
     document.querySelector('.modal').classList.remove('is-active');
   });
 
-  modalContent.append(title, message, deleteButton, cancelButton);
+  fieldsetInfo.append(labelLastName, labelName, labelPatronymic);
+  fieldsetContacts.append(addContactButton);
+  form.append(fieldsetInfo, fieldsetContacts, createButton, cancelButton);
+
+  modalContent.append(title, closeButton, form, cancelButton);
 }
