@@ -1,7 +1,12 @@
 import { createIcons } from '../create-icons.js';
+import { deleteClientOnServer } from '../api.js';
+import { deleteClientHandler } from '../client-handlers.js';
+import { createTableBody } from '../create-table-body.js';
+import { clientsList } from '../main.js';
 
 // функция создания контента модального окна (удаление клиента)
 export function createDeleteConfirmationModal(id, modalContent) {
+  let modal = document.querySelector('.modal');
   let title = document.createElement('h2');
   let message = document.createElement('p');
   let deleteButton = document.createElement('button');
@@ -9,7 +14,9 @@ export function createDeleteConfirmationModal(id, modalContent) {
   let closeButton = document.createElement('button');
   let closeIcon = createIcons.createCrossIcon();
 
-  title.classList.add('modal__title');
+  modalContent.innerHTML = '';
+
+  title.classList.add('modal__title', 'modal__title--delete');
   message.classList.add('modal__message');
   deleteButton.classList.add('modal__btn', 'btn');
   cancelButton.classList.add('modal__cancel-btn', 'btn');
@@ -21,17 +28,31 @@ export function createDeleteConfirmationModal(id, modalContent) {
   deleteButton.innerHTML = 'Удалить';
   cancelButton.innerHTML = 'Отмена';
 
-  deleteButton.addEventListener('click', () => {
-    //deleteClient(id); ЗДЕСЬ НУЖНО УДАЛИТЬ КЛИЕНТА ИЗ БАЗЫ И ТАБЛИЦЫ
-    document.querySelector('.modal').classList.remove('is-active');
+  // вынести всё в хандлер
+  deleteButton.addEventListener('click', async (event) => {
+    try {
+      const deletedClient = clientsList.findIndex((client) => client.id === id);
+
+      if (deletedClient) {
+        await deleteClientOnServer(id);
+
+        clientsList.splice(deletedClient, 1);
+        console.log(clientsList);
+
+        createTableBody(clientsList);
+        modal.classList.remove('is-active');
+      }
+    } catch (error) {
+      throw error;
+    }
   });
 
   cancelButton.addEventListener('click', () => {
-    document.querySelector('.modal').classList.remove('is-active');
+    modal.classList.remove('is-active');
   });
 
   closeButton.addEventListener('click', () => {
-    document.querySelector('.modal').classList.remove('is-active');
+    modal.classList.remove('is-active');
   });
 
   modalContent.append(title, message, deleteButton, cancelButton, closeButton);

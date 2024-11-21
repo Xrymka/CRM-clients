@@ -1,15 +1,27 @@
-const SERVER_DATA = 'http://localhost:3000/api/clients';
+const URL_DATA = 'http://localhost:3000/api/clients';
 
 async function createClientOnServer(client) {
-  fetch(SERVER_DATA, {
-    method: 'POST',
-    headers: { 'Content-Type' : 'application/json'},
-    body: JSON.stringify(client)
-  });
+  try {
+    const response = await fetch(URL_DATA, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(client)
+    });
+
+    if (!response.ok) {
+      throw new Error(`Ошибка: ${response.status} ${response.statusText}`);
+    }
+    const createdClient = await response.json();
+
+    return createdClient;
+
+  } catch (error) {
+    throw error;
+  }
 }
 
 const getData = (onSuccess, onError) => {
-  fetch(SERVER_DATA)
+  fetch(URL_DATA)
     .then((response) => {
       if (response.ok) {
         return response.json();
@@ -25,13 +37,46 @@ const getData = (onSuccess, onError) => {
     });
 };
 
+// Функция созданная вместе с чатом GPT для поиска клиента в базе,
+//пока не работает :(
+const getSearchData = (searchString, onSuccess, onError) => {
+  const URL_DATA = `http://localhost:3000/api/clients?search=` + searchString;
+
+  fetch(URL_DATA)
+    .then((response) => {
+      if (response.ok) {
+        console.log(response);
+        return response.json();
+      }
+
+      throw new Error(`${response.status} ${response.statusText}`);
+    })
+    .then((data) => {
+      onSuccess(data);
+    })
+    .catch((err) => {
+      onError(err);
+    });
+};
+
 async function deleteClientOnServer(id) {
-  await fetch(SERVER_DATA+id, {
-    method: 'DELETE'
+  await fetch(URL_DATA + "/" + id, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/JSON'
+    }
   });
 }
 
-export { createClientOnServer, deleteClientOnServer, getData }
+async function editClientOnServer(id, client) {
+  await fetch(URL_DATA + "/" + id, {
+    method: 'PATCH',
+    headers: { 'Content-Type' : 'application/json'},
+    body: JSON.stringify(client)
+  });
+}
+
+export { createClientOnServer, deleteClientOnServer, editClientOnServer, getSearchData, getData }
 
 
 /*

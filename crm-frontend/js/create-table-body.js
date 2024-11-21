@@ -35,12 +35,18 @@ function createClientItem(clientObj) {
   let editButton = createButton(createIcons.createEditIcon(), 'Изменить');
   let deleteButton = createButton(createIcons.createDeleteIcon(), 'Удалить');
 
+  const createdAtDate = new Date(clientObj.createdAt);
+  const updatedAtDate = new Date(clientObj.updatedAt);
+
   clientID.innerHTML = clientObj.id;
   clientName.innerHTML = `${clientObj.surname} ${clientObj.name} ${clientObj.lastName}`;
-  clientCreationTime.innerHTML = `${clientObj.createdAt.getHours()}:${(clientObj.createdAt.getMinutes() < 10)? '0' + clientObj.createdAt.getMinutes() : clientObj.createdAt.getMinutes()}`;
-  clientCreationDate.append(clientObj.createdAt.toLocaleDateString(), clientCreationTime);
-  clientLastChangingTime.innerHTML = `${clientObj.updatedAt.getHours()}:${(clientObj.updatedAt.getMinutes() < 10)? '0' + clientObj.updatedAt.getMinutes() : clientObj.updatedAt.getMinutes()}`;
-  clientLastChanging.append(clientObj.updatedAt.toLocaleDateString(), clientLastChangingTime);
+
+  clientCreationTime.innerHTML = `${createdAtDate.getHours()}:${(createdAtDate.getMinutes() < 10) ? '0' + createdAtDate.getMinutes() : createdAtDate.getMinutes()}`;
+  clientCreationDate.append(createdAtDate.toLocaleDateString(), clientCreationTime);
+
+  clientLastChangingTime.innerHTML = `${updatedAtDate.getHours()}:${(updatedAtDate.getMinutes() < 10) ? '0' + updatedAtDate.getMinutes() : updatedAtDate.getMinutes()}`;
+  clientLastChanging.append(updatedAtDate.toLocaleDateString(), clientLastChangingTime);
+
   clientContacts.append(createContactsList(clientObj));
 
   clientCreationTime.classList.add('table__body-time');
@@ -55,7 +61,6 @@ function createClientItem(clientObj) {
 
   deleteButton.addEventListener('click', () => {
     openModal(modalModes.delete, clientObj.id);
-    //createDeleteConfirmationModal(clientObj.id);
   });
 
   editButton.addEventListener('click', () => {
@@ -69,8 +74,8 @@ function createClientItem(clientObj) {
 }
 
 // функция создания кнопки
-function createButton(icon, text) {
-  let button = document.createElement('button');
+export function createButton(icon, text) {
+  let button = document.createElement('button'); 
   let buttonIcon = icon;
   button.classList.add('btn');
   button.append(buttonIcon, text);
@@ -97,8 +102,6 @@ function createContactsList(clientObj) {
     contactNumber++;
   });
 
-
-
   /*let shownContacts = clientsContacts.slice(4);
   /*shownContacts.forEach(function(item) {
     item.classList.remove('contacts__item--hidden');
@@ -111,14 +114,29 @@ function createContactsList(clientObj) {
 // функция создания контакта
 function createContactsIcon(item) {
   let contactsItem = document.createElement('li');
+  let tooltip = document.createElement('div');
+  let tooltipLink = document.createElement('a');
+  let tooltipType = document.createElement('span');
   contactsItem.classList.add('contacts__item', 'contacts__item--hidden');
+  tooltip.classList.add('tooltip');
+  tooltipLink.classList.add('tooltip__link');
+  tooltipType.classList.add('tooltip__type');
+  contactsItem.append(tooltip);
+
+  tooltipLink.href = item.value;
+  tooltipLink.target = '_blank';
+  tooltipLink.innerHTML = item.value;
+  tooltipType.innerHTML = item.type + ':&nbsp;';
+  tooltip.append(tooltipType, tooltipLink);
 
   switch(item.type) {
     case contactTypes.phone:
       contactsItem.append(createIcons.createPhoneIcon());
+      tooltipLink.href = `tel:${item.value}`;
       break;
     case contactTypes.email:
       contactsItem.append(createIcons.createEmailIcon());
+      tooltipLink.href = `mailto:${item.value}`;
       break;
     case contactTypes.facebook:
       contactsItem.append(createIcons.createFacebookIcon());
@@ -137,6 +155,4 @@ function createContactsIcon(item) {
   return contactsItem;
 }
 
-// функция создания тултипа
-
-export { createTableBody }
+export { createTableBody, createClientItem }

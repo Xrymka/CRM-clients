@@ -31,6 +31,7 @@ function createModalBase() {
 
 createModalBase();
 const modalContent = document.querySelector('.modal__content');
+const modal = document.querySelector('.modal');
 
 // функция отображения модального окна
 function openModal(modalMode, id) {
@@ -48,7 +49,13 @@ function openModal(modalMode, id) {
       break;
   }
 
-  document.querySelector('.modal').classList.add('is-active');
+  modal.addEventListener('click', function(e) {
+    if (!modalContent.contains(e.target)) {
+      modal.classList.remove('is-active');
+    }
+  });
+
+  modal.classList.add('is-active');
 }
 
 export { modalModes, openModal }

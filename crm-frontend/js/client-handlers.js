@@ -1,27 +1,30 @@
+// import { clientsList } from "./main";
+//import { deleteClientOnServer } from "./api";
+
 // функция удаления клиента
-function deleteClientHandler(clientObj) {
-  const indexToDelete = clientsCopyList.findIndex((student) => student === clientObj);
+async function deleteClientHandler(id) {
+  /*const indexToDelete = clientsList.findIndex((client) => client.id === clientObj.id);
 
   if (indexToDelete !== -1) {
-    deleteStudentOnServer(clientObj.id);
+    await deleteClientOnServer(clientObj.id);
 
-    clientsCopyList.splice(indexToDelete, 1);
+    clientsList.splice(indexToDelete, 1);
 
-    createTableBody(clientsCopyList);
-  }
+    createTableBody(clientsList);
+  }*/
 }
 
 // функция изменения клиента
 function editClientHandler(clientObj) {
-  const indexToDelete = clientsCopyList.findIndex((student) => student === clientObj);
+  /*const indexToDelete = clientsList.findIndex((student) => student === clientObj);
 
   if (indexToDelete !== -1) {
     editStudentOnServer(clientObj.id);
 
-    clientsCopyList.splice(indexToDelete, 1);
+    clientsList.splice(indexToDelete, 1);
 
-    createTableBody(clientsCopyList);
-  }
+    createTableBody(clientsList);
+  }*/
 }
 
 // функция создания клиента

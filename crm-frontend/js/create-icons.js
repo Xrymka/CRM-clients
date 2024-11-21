@@ -67,13 +67,70 @@ export class createIcons {
     return svg;
   }
 
+  static createSvgIcon() {
+    // Create SVG element
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.setAttribute("viewBox", "0 0 160 160");
+    svg.setAttribute("height", "16");
+    svg.setAttribute("width", "16");
+
+    // Create circle element
+    const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    circle.setAttribute("r", "60");
+    circle.setAttribute("cx", "80");
+    circle.setAttribute("cy", "80");
+    circle.setAttribute("fill", "transparent");
+    circle.setAttribute("stroke", "#9873FF");
+    circle.setAttribute("stroke-width", "13.5px");
+
+    // Create group element
+    const group = document.createElementNS("http://www.w3.org/2000/svg", "g");
+    group.setAttribute("fill", "#9873FF");
+
+    // Create first rectangle element
+    const rect1 = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+    rect1.setAttribute("width", "13.5");
+    rect1.setAttribute("height", "66.5");
+    rect1.setAttribute("x", "73.3");
+    rect1.setAttribute("y", "46.6");
+    rect1.setAttribute("rx", "7");
+
+    // Create second rectangle element
+    const rect2 = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+    rect2.setAttribute("width", "13.5");
+    rect2.setAttribute("height", "66.5");
+    rect2.setAttribute("x", "73.3");
+    rect2.setAttribute("y", "46.6");
+    rect2.setAttribute("rx", "7");
+    rect2.setAttribute("transform", "rotate(90 80 80)");
+
+    // Append elements
+    group.appendChild(rect1);
+    group.appendChild(rect2);
+    svg.appendChild(circle);
+    svg.appendChild(group);
+
+    // Optionally, you can specify an element to append this SVG to
+    // For example: document.body.appendChild(svg);
+    // Or return the SVG element if you want to append it elsewhere
+    return svg;
+  }
+
+//   `<svg viewBox="0 0 160 160" height="16" width="16" "http://www.w3.org/2000/svg"="http://www.w3.org/2000/svg" >
+//     <circle r="60" cx="80" cy="80" fill="transparent" stroke="#9873FF" stroke-width="13.5px"></circle>
+//     <g fill="#9873FF" >
+//       <rect width="13.5" height="66.5" x="73.3" y="46.6" rx="7"></rect>
+//       <rect width="13.5" height="66.5" x="73.3" y="46.6" rx="7" transform = "rotate(90 80 80)"></rect>
+//     </g>
+// </svg>
+
   // функция создания иконки вк
   static createVkIcon() {
     const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
     svg.setAttribute("width", "16");
     svg.setAttribute("height", "16");
     svg.setAttribute("viewBox", "0 0 16 16");
-    svg.setAttribute("class", "socials");
+    svg.setAttribute("class", "vk");
 
     const g = document.createElementNS("http://www.w3.org/2000/svg", "g");
     g.setAttribute("opacity", "0.7");
@@ -94,7 +151,7 @@ export class createIcons {
     svg.setAttribute("width", "16");
     svg.setAttribute("height", "16");
     svg.setAttribute("viewBox", "0 0 16 16");
-    svg.setAttribute("class", "socials");
+    svg.setAttribute("class", "fb");
 
     const g = document.createElementNS("http://www.w3.org/2000/svg", "g");
     g.setAttribute("opacity", "0.7");
@@ -115,7 +172,7 @@ export class createIcons {
     svg.setAttribute("width", "16");
     svg.setAttribute("height", "16");
     svg.setAttribute("viewBox", "0 0 16 16");
-    svg.setAttribute("class", "socials");
+    svg.setAttribute("class", "phone");
 
     const g = document.createElementNS("http://www.w3.org/2000/svg", "g");
     g.setAttribute("opacity", "0.7");
@@ -143,7 +200,7 @@ export class createIcons {
     svg.setAttribute("width", "16");
     svg.setAttribute("height", "16");
     svg.setAttribute("viewBox", "0 0 16 16");
-    svg.setAttribute("class", "socials");
+    svg.setAttribute("class", "mail");
 
     const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
     path.setAttribute("opacity", "0.7");
@@ -163,7 +220,7 @@ export class createIcons {
     svg.setAttribute("width", "16");
     svg.setAttribute("height", "16");
     svg.setAttribute("viewBox", "0 0 16 16");
-    svg.setAttribute("class", "socials");
+    svg.setAttribute("class", "contact");
 
     const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
     path.setAttribute("opacity", "0.7");
@@ -224,6 +281,22 @@ export class createIcons {
       path.setAttribute("stroke-width", "2");
       path.setAttribute("stroke-miterlimit", "10");
       path.setAttribute("stroke-linecap", "round");
+
+      svg.appendChild(path);
+      return svg;
+    }
+
+    // функция создания иконки стрелки открытия/закрытия
+    static createArrowSelectIcon() {
+      const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+      svg.setAttribute("width", "10");
+      svg.setAttribute("height", "6");
+      svg.setAttribute("viewBox", "0 0 10 6");
+      svg.setAttribute("fill", "none");
+
+      const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+      path.setAttribute("d", "M0.495029 0.690033C0.250029 0.935033 0.250029 1.33003 0.495029 1.57503L4.65003 5.73003C4.84503 5.92503 5.16003 5.92503 5.35503 5.73003L9.51003 1.57503C9.75503 1.33003 9.75503 0.935032 9.51003 0.690033C9.26503 0.445032 8.87003 0.445032 8.62503 0.690033L5.00003 4.31003L1.37503 0.685034C1.13503 0.445034 0.735029 0.445033 0.495029 0.690033Z");
+      path.setAttribute("fill", "#9873FF");
 
       svg.appendChild(path);
       return svg;
