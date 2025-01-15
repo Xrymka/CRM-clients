@@ -7,8 +7,9 @@
   --light-grey-opacity: rgba(200, 197, 209, 0.3);
   --dark-grey: #B0B0B0;
   --black: #333;
-  --white: #fff;
+  --white: #FFF;
   --white-smoke: #F5F5F5;
+  --mercury: #E7E5EB;
 }
 
 @font-face {
@@ -368,6 +369,11 @@ body {
   fill: var(--white);
 }
 
+.modal__inner + .modal__contacts-btn {
+  margin-top: 10px;
+  margin-bottom: 17px;
+}
+
 .modal__close-btn {
   position: absolute;
   top: 15px;
@@ -457,6 +463,7 @@ body {
 
 .modal__fieldset--contacts {
   position: relative;
+  gap: 15px;
   padding: 8px 0;
   background-color: var(--light-grey-opacity);
 }
@@ -602,4 +609,126 @@ body {
 .main__btn:focus-visible svg path,
 .main__btn:active svg path {
   fill: var(--white);
+}
+
+.modal__inner {
+  position: relative;
+  display: grid;
+  grid-template-columns: 31.5% 1fr;
+  min-height: 37px;
+  min-width: 100%;
+}
+
+.modal__inner:first-of-type {
+  margin-top: 17px;
+}
+
+.modal__contact-btn {
+  position: absolute;
+  right: 0;
+  min-height: 100%;
+  padding: 9px 6px 8px 7px;
+  border: 1px solid var(--light-grey);
+  background-color: var(--mercury);
+  transition: all 0.3s ease-in-out;
+}
+
+.modal__contact-btn-wrapper {
+  position: absolute;
+  right: 0;
+  bottom: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  transform: translateY(50%);
+}
+
+.modal__contact-btn-wrapper::after {
+  content: "";
+  position: absolute;
+  top: 5px;
+  left: -13px;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: var(--black) transparent transparent transparent;
+  visibility: hidden;
+  transition: visibility 0.3s ease-in-out;
+}
+
+.modal__contact-btn-wrapper .tooltip {
+  position: absolute;
+  z-index: 1;
+  bottom: 90%;
+  right: -50px;
+  padding: 7px 14px;
+  visibility: hidden;
+  background: var(--black);
+  color: var(--white);
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 700;
+  text-align: center;
+  white-space: nowrap;
+  transition: visibility 0.3s ease-in-out;
+}
+
+.modal__contact-btn-wrapper:focus::after,
+.modal__contact-btn-wrapper:hover::after {
+  visibility: visible;
+}
+
+.modal__contact-btn-wrapper:focus .tooltip,
+.modal__contact-btn-wrapper:hover .tooltip {
+  visibility: visible;
+}
+
+.modal__contact-btn  svg path {
+  fill: var(--light-grey);
+  transition: all 0.3s ease-in-out;
+}
+
+.modal__contact-btn:hover svg path {
+  fill: var(--red);
+}
+
+.modal__contact-btn:hover {
+  border-color: var(--red);
+}
+
+.modal__select-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 100%;
+  min-height: 100%;
+  padding: 8px 9px 8px 12px;
+  border: 1px solid var(--light-grey);
+  background-color: var(--mercury);
+}
+
+.modal__select-text {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+}
+
+.modal__contact-input {
+  padding-right: 30px;
+  padding-left: 12px;
+  font-size: 14px;
+  color: var(--dark-grey);
+  border: 1px solid var(--light-grey);
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.modal__contact-input:focus-visible {
+  outline-offset: 2px;
+}
+
+.modal__list {
+  position: absolute;
+  list-style: none;
 }
